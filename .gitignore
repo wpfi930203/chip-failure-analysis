@@ -1,0 +1,24 @@
+# ---- 机器/本地特有，不入库 ----
+# 每个 clone 的绝对路径都不同，由 tools/sync_meta.py 现场生成
+_user_meta.json
+_skillhub_meta.json
+_marketplace_meta.json
+_knot_meta.json
+_builtin_market_meta.json
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# ---- 复跑产物（由 tools/preview_icon.py 生成到外部 _tools/，此处兜底） ----
+_icon_preview.png

@@ -1,0 +1,15 @@
+# 统一换行：文本一律 LF，避免 Windows/Linux 协作时全文件 diff
+* text=auto eol=lf
+
+# 显式标注二进制，防止被当文本处理（图标 200x200 PNG）
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+
+# SVG 是文本，保留 diff 能力
+*.svg text eol=lf
+
+# 让 CHANGELOG / README 在 GitHub 语言统计里不被算进代码
+*.md linguist-documentation

@@ -1,0 +1,1059 @@
+{
+  "modules": {
+    "chip-fa-hermeticity": {
+      "skill": "chip-fa-hermeticity",
+      "version": "5.0.2",
+      "should_trigger": [
+        {
+          "prompt": "气密封装的IGBT模块做HV-H3TRB出现内部水汽超标，怀疑管壳漏气，检漏应该从哪一步开始？",
+          "expect": "先粗检后细检的铁律；氟碳化合物加压法路径；检漏排在开封之前；判废限值与内腔体积挂钩"
+        },
+        {
+          "prompt": "氦质谱检漏读数为零，能直接判定器件气密合格吗？",
+          "expect": "不能：特大漏孔在氦检中因氦已逃逸而假阴性（R-5）；必须先粗检排除大漏；同时区分测量泄漏速率与计算泄漏速率"
+        },
+        {
+          "prompt": "客户给的漏率判废限值是固定的5×10⁻⁷，我们器件内腔体积0.05 cm³，这个限值能用吗？",
+          "expect": "限值必须是内腔体积的函数（R-3）；体积0.1 cm³以下适用更严档；引用标准须写全轰击条件+体积档+测量/计算限值四元组；数值以MIL-STD-883 M1014现行版为准"
+        },
+        {
+          "prompt": "密封有效期说能存10年，怎么用泄漏速率论证？",
+          "expect": "密封有效期T是漏率的指数函数；保护气氛损耗90%所需时间（R-2）；须把氦漏率换算为空气漏率后按现行公式重算；书内表6-4数值不得直接引用"
+        },
+        {
+          "prompt": "氟碳化合物粗检具体怎么操作，灵敏度大概多少？",
+          "expect": "真空1 Torr灌F-113→加压3–5 atm约3 h→125℃全氟三丁胺观察气泡；灵敏度10⁻⁵；适用于10⁻⁵–10⁻³档"
+        }
+      ],
+      "decoy": [
+        {
+          "prompt": "塑封器件回流焊后鼓包分层，怎么检漏？",
+          "expect": "不触发本技能：塑封无金属腔体，漏率体系不适用；应路由 chip-fa-mechanism（分层/爆米花）"
+        },
+        {
+          "prompt": "Help me draw a bubble chart of leakage current vs temperature in Python",
+          "expect": "字面撞车（bubble/leakage）不触发；属数据分析请求"
+        }
+      ],
+      "boundary": [
+        {
+          "prompt": "给出氦质谱检漏的计算公式和密封有效期的经验公式",
+          "expect": "诚实声明：公式（6-13/6-15/6-17~6-20）在OCR中丢失，本技能只保留概念与数量级关系，须从MIL-STD-883 M1014或教科书恢复，不得凭本技能复现"
+        },
+        {
+          "prompt": "书里那个0.1 cm³、3.6天的有效期数据直接写进报告行不行",
+          "expect": "不行：1980年代数据且公式丢失无法复核；只可用作数量级直觉，报告数值必须按实际体积与现行公式重算"
+        },
+        {
+          "prompt": "破坏性氦检精度那么高，能不能拿来全检成品？",
+          "expect": "不能：打孔直连破坏器件，只适合零件检漏、校对与方法仲裁，不用于成品筛选"
+        }
+      ]
+    },
+    "chip-fa-router": {
+      "skill": "chip-fa-router",
+      "version": "5.0.2",
+      "prompts": [
+        {
+          "prompt": "这颗 IGBT 模块炸了，帮我分析一下原因",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "芯片失效分析一般怎么开展",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "客户退回来三只管子，我先做什么",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "失效分析报告应该包含哪些内容",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "这颗管子不导通了，是 EOS 还是本身质量问题",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "帮我算一下这个月的良率",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "IGBT 的驱动电阻怎么选",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "MOSFET 的开关损耗怎么计算",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "你能直接判定这颗芯片是供应商的责任吗",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        },
+        {
+          "prompt": "帮我出一份能上法庭的失效分析报告",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        },
+        {
+          "prompt": "SiC 器件的栅氧退化机理是什么",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        }
+      ],
+      "notes": "decoy 类用于验证不会误触发；boundary 类应触发并显式声明边界（不给结论/不给参数/指出体系差异）"
+    },
+    "chip-fa-procedure": {
+      "skill": "chip-fa-procedure",
+      "version": "5.0.2",
+      "prompts": [
+        {
+          "prompt": "失效分析按什么顺序做",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "分析方案怎么设计，破坏性分析什么时候做",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "失效分析报告骨架给我一个",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "样品信息调查要问哪些内容",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "结论怎么写才不会被客户驳回",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "帮我排一个生产计划",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "这份 8D 报告的 D4 怎么写",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "怎么保证结果验证环节真的闭环",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        },
+        {
+          "prompt": "大批量退货怎么用数据分析定位异常批",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        }
+      ],
+      "notes": "decoy 类用于验证不会误触发；boundary 类应触发并显式声明边界（不给结论/不给参数/指出体系差异）"
+    },
+    "chip-fa-electrical": {
+      "skill": "chip-fa-electrical",
+      "version": "5.0.2",
+      "prompts": [
+        {
+          "prompt": "失效样品到手先测哪些电参数",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "这颗二极管反向漏电大，可能是什么原因",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "击穿电压偏低有哪几种可能",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "IV 曲线理想因子变大说明什么",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "功率 MOS 的导通电阻怎么测",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "帮我选一个 LCR 测试仪型号并报价",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "如何在产线上做 100% 电测筛选",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "用万用表测行不行",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        },
+        {
+          "prompt": "大规模数字 IC 的 ATPG 失效诊断怎么做",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        }
+      ],
+      "notes": "decoy 类用于验证不会误触发；boundary 类应触发并显式声明边界（不给结论/不给参数/指出体系差异）"
+    },
+    "chip-fa-stress-test": {
+      "skill": "chip-fa-stress-test",
+      "version": "5.0.2",
+      "prompts": [
+        {
+          "prompt": "客户现场的失效复现不出来怎么办",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "怎么区分离子沾污和结构缺陷导致的漏电",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "温度循环能激发什么失效",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "要不要做高压蒸煮试验",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "间歇性失效怎么在实验室里让它出现",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "帮我排一下可靠性试验室的排期",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "这批产品的质保期是多久",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "给我一个具体的温度循环条件参数",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        },
+        {
+          "prompt": "HALT 通过了是不是就等于产品合格",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        }
+      ],
+      "notes": "decoy 类用于验证不会误触发；boundary 类应触发并显式声明边界（不给结论/不给参数/指出体系差异）"
+    },
+    "chip-fa-mechanism": {
+      "skill": "chip-fa-mechanism",
+      "version": "5.0.2",
+      "prompts": [
+        {
+          "prompt": "怎么区分 EOS 和 ESD 失效",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "闩锁效应怎么判定",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "栅氧击穿是什么样子的",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "这颗芯片是电迁移开路还是机械断裂",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "爆米花效应是怎么形成的",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "帮我设计一个过流保护电路",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "这颗芯片的失效概率有多少",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "SiC 器件的动态 R_on 退化属于哪一类机理",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        },
+        {
+          "prompt": "导线键合铜线替代铝线的失效机理有变化吗",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        }
+      ],
+      "notes": "decoy 类用于验证不会误触发；boundary 类应触发并显式声明边界（不给结论/不给参数/指出体系差异）"
+    },
+    "chip-fa-reliability-stats": {
+      "skill": "chip-fa-reliability-stats",
+      "version": "5.0.2",
+      "should_trigger": [
+        {
+          "prompt": "1000小时寿命试验23片全部没坏，MTTF怎么报给客户？",
+          "expect": "0失效不能估m，只能给置信下限；诚实声明图估法不适用零失效数据；建议延长时间或增加应力"
+        },
+        {
+          "prompt": "威布尔概率纸描出来是弯的，是不是这批数据不能分析？",
+          "expect": "不是：先做直线化尝试（r>0左移/保证寿命，r<0按F(t)=A+(1-A)F0修正）；仍不成才换对数正态概率纸或判非纯分布"
+        },
+        {
+          "prompt": "HV-H3TRB试验数据怎么用威布尔分析拟合？",
+          "expect": "分级截尾数据按失效时间升序排→中位秩表算F(t)→描点→读m；m<1早期失效/m≈1指数/m>1耗损；0失效给置信下限"
+        },
+        {
+          "prompt": "150℃加速老化测出的寿命怎么换算成85℃下的寿命？",
+          "expect": "Arrhenius模型lgt=a+b/T；由两组温度求b→E=2.303bK→加速系数τ=exp[(E/K)(1/T0-1/T1)]；必须确认高应力下机理未变（R-7）"
+        },
+        {
+          "prompt": "形状参数m=0.6说明什么问题？",
+          "expect": "m<1：接近早期失效期（R-1），说明筛选未筛净或工艺缺陷主导；应反馈筛选/工艺改进，不做寿命外推"
+        }
+      ],
+      "decoy": [
+        {
+          "prompt": "用Python的scipy拟合这批数据的Weibull分布并画直方图",
+          "expect": "字面撞车（Weibull/分布拟合）不触发；属编程请求，可顺带提示本书方法为图估法，数值分析法本书未覆盖"
+        },
+        {
+          "prompt": "这条产线的x̄-R控制图超限了怎么处理？",
+          "expect": "SPC过程控制属chip-fa-prevention的防护段（b3第10章），不是寿命试验数据分析"
+        }
+      ],
+      "boundary": [
+        {
+          "prompt": "给出威布尔分布函数的完整数学表达式并推导三参数估计公式",
+          "expect": "诚实声明：式(3-1)含指数项在OCR中丢失上标，本技能不凭记忆复现原文形式；图估操作链完整可用，数值法（MLE等）本书未覆盖"
+        },
+        {
+          "prompt": "失效率等级鉴定抽多少只、允许几只失效？",
+          "expect": "本技能只覆盖抽样方案分类与α/β两类错误概念；具体抽样表（§4.3后）未OCR，须查GB/T 1772现行版"
+        },
+        {
+          "prompt": "书里激活能表上的0.84 eV能不能直接写进鉴定报告？",
+          "expect": "不能：1980年代参考值，只作方向判据；报告须用自家试验数据按E=2.303bK实测，并与失效形貌互证"
+        }
+      ]
+    },
+    "chip-fa-characterization": {
+      "skill": "chip-fa-characterization",
+      "version": "5.0.2",
+      "prompts": [
+        {
+          "prompt": "怎么判断封装里有没有分层",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "键合界面空洞用什么看",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "芯片表面异物的成分怎么分析",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "封装内部水汽含量怎么测",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "X 射线透视能看到什么缺陷",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "帮我做一份 SEM 测试外包报价对比",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "这颗芯片的 datasheet 在哪下载",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "有分层是不是就一定会失效",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        },
+        {
+          "prompt": "仅凭 EDS 检测到氯元素能判定腐蚀原因吗",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        }
+      ],
+      "notes": "decoy 类用于验证不会误触发；boundary 类应触发并显式声明边界（不给结论/不给参数/指出体系差异）"
+    },
+    "chip-fa-reasoning": {
+      "should_trigger": [
+        "现场一块开裂的 DBC 基板上有好几条裂纹，我应该先分析哪一条，怎么确定主裂纹？",
+        "断口表面的腐蚀产物要清洗掉再拍 SEM 吗？会不会破坏证据？",
+        "失效归因应该用故障树还是鱼骨图？这两个方法怎么选？",
+        "客户质疑我们的失效分析推理链，说我们对他们的进口器件预设了无缺陷，这是哪个分析原则的问题？",
+        "断口宏观分析要交付哪些内容？只拍几张照片行不行？"
+      ],
+      "decoy": [
+        "帮我用 Python matplotlib 画一个鱼骨图模板",
+        "金属疲劳断口的贝纹线间距怎么用来计算裂纹扩展速率（Paris 公式拟合）"
+      ],
+      "boundary": [
+        "塑封料 (EMC) 开裂断口有没有贝纹线特征？——不直接套用，边界声明：贝纹/人字纹是金属断口判据，高分子与陶瓷断口须重新标定，应结合 chip-fa-mechanism 分析",
+        "请给我 FTA 建树的五条规则和最小割集上行法步骤——路由到 ./chip-fa-prevention，本技能只做方法选型",
+        "芯片表面沾污清洗该用什么溶液？——路由到 ./chip-fa-sample-prep，本技能的化学清洗配方仅针对金属断口且明确禁止用于芯片表面"
+      ],
+      "version": "5.0.2"
+    },
+    "chip-fa-localization": {
+      "skill": "chip-fa-localization",
+      "version": "5.0.2",
+      "prompts": [
+        {
+          "prompt": "开封后做 EMMI 没看到亮点，还能怎么办",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "OBIRCH 和 TIVA 有什么区别，该用哪个",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "封装不能打开，怎么定位短路点",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "电压衬度分析怎么做",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "红外热像能定位到哪一层",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "帮我把这颗芯片的电路改一下",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "采购一台 EMMI 设备要多少钱",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "SiC 模块用 1340nm 波长合适吗",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        },
+        {
+          "prompt": "已开路的样品还能做热点定位吗",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        }
+      ],
+      "notes": "decoy 类用于验证不会误触发；boundary 类应触发并显式声明边界（不给结论/不给参数/指出体系差异）"
+    },
+    "chip-fa-sample-prep": {
+      "skill": "chip-fa-sample-prep",
+      "version": "5.0.2",
+      "prompts": [
+        {
+          "prompt": "塑封模块要打开看芯片，用什么方法",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "化学开封后铝键合线没了怎么办",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "怎么去掉钝化层看下面的金属",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "看焊点界面用金相切片还是 FIB",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "芯片要减薄做背面分析，怎么制样",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "帮我买一台开封机",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "这个封装外壳的图纸怎么画",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "给我一份化学开封的酸液配比",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        },
+        {
+          "prompt": "铜互连低 k 介质怎么剥层",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        }
+      ],
+      "notes": "decoy 类用于验证不会误触发；boundary 类应触发并显式声明边界（不给结论/不给参数/指出体系差异）"
+    },
+    "chip-fa-closed-loop": {
+      "skill": "chip-fa-closed-loop",
+      "version": "5.0.2",
+      "should_trigger": [
+        "失效分析报告交付后产线同类失效仍反复出现，如何建立验证闭环？",
+        "客户投诉某批次模块失效比例偏高，帮我组织排查思路",
+        "怎么给客户端搭建 FRACAS 故障报告、分析和纠正系统？",
+        "多个候选失效原因（烧结空洞/键合损伤/静电）如何确定哪个是主导因素？",
+        "失效归因时如何避免只盯器件本身、忽略环境与管理因素？"
+      ],
+      "decoy": [
+        "如何用 SEM 二次电子像观察电迁移空洞？（→ chip-fa-characterization）",
+        "威布尔概率纸怎么做参数估计？（→ chip-fa-reliability-stats）",
+        "开封时化学腐蚀液配比怎么选？（→ chip-fa-sample-prep）"
+      ],
+      "boundary": [
+        "FRACAS 体系如何通过 IATF 16949 认证审核？（超出书籍范围，只提供方法论骨架）",
+        "多重秩检验临界值表直接给我数值（书未给全表，须查统计学手册）"
+      ]
+    },
+    "chip-fa-prevention": {
+      "skill": "chip-fa-prevention",
+      "version": "5.0.2",
+      "prompts": [
+        {
+          "prompt": "元器件级 FMEA 的功能单元怎么划分",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "最低约定层次怎么定",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "FMEA 的风险等级 R 怎么算",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "严重度和发生频率的等级怎么划分",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "基于失效物理的故障树怎么建",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "元器件故障树的六层结构分别是什么",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "最小割集怎么求，上行法和下行法有什么区别",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "建故障树的时候共因事件怎么处理",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "FTA 和 FMEA 怎么配合使用",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "潮湿敏感器件怎么管控",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "怎么预防 CMOS 闩锁",
+          "expect": "trigger",
+          "kind": "should_trigger"
+        },
+        {
+          "prompt": "帮我写一段 PFMEA 的培训讲稿",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "这个月的质量成本报告怎么做",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "怎么用 Python 画一棵树状图",
+          "expect": "no_trigger",
+          "kind": "decoy"
+        },
+        {
+          "prompt": "书里的 RPN 和 AIAG VDA 2019 的 AP 能直接对应吗",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        },
+        {
+          "prompt": "MSD 的车间寿命具体是多少小时",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        },
+        {
+          "prompt": "帮我算一下这个模块的故障发生概率是多少",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        },
+        {
+          "prompt": "分立器件能不能做故障树定量分析",
+          "expect": "trigger_with_boundary",
+          "kind": "boundary"
+        }
+      ],
+      "notes": "v1.1.0：补入 FTA 方向（六层结构/最小割集/共因事件/FTA+FMEA 联合）与 FMEA 风险等级（R=S×O/严重度/发生频率）的触发用例。decoy 类用于验证不会误触发（含'画树状图'这类字面撞车但语义无关的诱饵）；boundary 类应触发并显式声明边界：不给结论、不给参数、指出 R=S×O 与 RPN/AP 的体系差异、指出定量分析仅适用于模块级器件。"
+    },
+    "standards-jesd22": {
+      "skill": "standards-jesd22",
+      "version": "5.0.2",
+      "should_trigger": [
+        {
+          "prompt": "IGBT 做 HTRB 考核，JEDEC 对应哪个方法？工作点电压怎么定？",
+          "expect": "JESD22-A108F HTRB：反向偏置主功率结，处于或接近最大额定击穿电压的静态模式；升压须厂商同意且不超绝对最大额定值；去偏置前先冷却到55°C以下"
+        },
+        {
+          "prompt": "湿热试验选 85/85 还是 HAST？uHAST 和 Autoclave 有什么区别？",
+          "expect": "现场等效选 A101（85°C/85%RH/1000h）；加速选 A110E（130°C/85%/230kPa/96h，约等于85/85≥1000h）；无偏压抓被偏置掩盖的机理选 A118B；冷凝稳健性选 A102E（121°C/100%RH/205kPa，FR4/胶带基板禁用）"
+        },
+        {
+          "prompt": "温循试验中途设备故障停了一夜，这批样品还能接着跑吗？",
+          "expect": "A104F/A106B 明文：中断总次数超过指定循环总数的10%必须从头重跑；未超10%可从中断点继续"
+        },
+        {
+          "prompt": "MSL3 的器件地板寿命多久、标准浸泡条件是什么？",
+          "expect": "地板寿命168h；标准浸泡 30°C/60%RH 192h（加速 40°C/60%RH 按 Ea 0.40-0.48/0.30-0.39 eV 换算，J-STD-020E Table 5-1）；分类后按 A113I 做 Precon"
+        },
+        {
+          "prompt": "做 IGBT 寿命曲线实验，功率循环条件怎么选才合规？",
+          "expect": "JESD22-A122A：非等温功率循环，条件 A-E（如 25/+125），2-6 cph；功率由加热器 V/I 传感计算不用电源面板值；TCR 按 JESD33 校准；TIM 粘结线厚度是关键变量；A122A 是近室温模拟不是加速试验，不得用其循环数外推现场寿命"
+        }
+      ],
+      "decoy": [
+        {
+          "prompt": "帮我写个 Python 脚本画温度循环曲线图",
+          "expect": "字面撞车（温度循环）不触发，属数据分析/绘图请求"
+        },
+        {
+          "prompt": "抗硫化电阻的标准是什么",
+          "expect": "不触发本模块：SemiAsk 库未收录抗硫化标准，诚实声明待蒸馏余量"
+        }
+      ],
+      "boundary": [
+        {
+          "prompt": "把 A110E 的 96h 判据直接写进客户鉴定报告",
+          "expect": "翻译版噪声警告：关键数值须回 JEDEC 英文原版核对后再引用；pass/fail 判据在 JESD47/采购文件/AEC-Q 系列，试验方法只规定怎么做"
+        },
+        {
+          "prompt": "MIL-STD-883 1014 的检漏限值表给我列一下",
+          "expect": "SemiAsk 库有 MIL-STD-883K 原文但本轮未蒸馏，B 段已声明待补余量；不凭记忆编造限值"
+        }
+      ]
+    },
+    "report-template": {
+      "skill": "report-template",
+      "version": "5.0.2",
+      "should_trigger": [
+        {
+          "prompt": "帮我出一份这颗 IGBT 的失效分析报告，客户要用",
+          "expect": "先跑接样确认清单 12 项（含输出格式确认），再按 report-template 报告 12 节模板组织；结论用四档表述、机理与原因分句、必含局限声明"
+        },
+        {
+          "prompt": "这个失效到底是晶圆还是封装的问题？怎么定位到工序？",
+          "expect": "用工序定位表六区（晶圆/封装/测试/包装/应用/可靠性）：证据特征→候选环节排序→对 TOP1-2 补取证；每个候选写支持/排除证据"
+        },
+        {
+          "prompt": "查分层和查焊层空洞分别用什么设备？",
+          "expect": "C-SAM 看声阻抗差异（分层第一手段），X-ray 看密度差异（焊层空洞）；两者互补不互替，选型见仪器矩阵"
+        },
+        {
+          "prompt": "报告要给客户端正式交付，输出成 PDF",
+          "expect": "按三格式规范：PDF 版与 HTML 同源，必含封面标识、签名栏与局限声明；三版结论一字不差"
+        }
+      ],
+      "decoy": [
+        {
+          "prompt": "帮我写个报告文学",
+          "expect": "字面撞车（报告）不触发，属写作请求"
+        },
+        {
+          "prompt": "把失效原因直接写成某某供应商的责任",
+          "expect": "拒绝：工序定位表是嫌疑排序工具不是责任认定表，B 段明令不产出责任结论"
+        }
+      ],
+      "boundary": [
+        {
+          "prompt": "报告里没做的检测项能不能省略不写",
+          "expect": "拒绝：第 11 节局限声明是固定节不许删，未做项如实标注未检测/未提供，这是报告可信度底线"
+        }
+      ]
+    },
+    "power-device-reliability": {
+      "skill": "power-device-reliability",
+      "version": "5.0.2",
+      "should_trigger": [
+        {
+          "prompt": "IGBT 模块功率循环试验怎么做？ΔTj 和 Tjm 怎么定？",
+          "expect": "三层次：磨损/异常/在线监测；ALT 原则：应力不得改变机理、每条件样本 6-12、ΔTj 与 Tjm 双变量控制（LESIT 曲线显示同 ΔTj 下 Tjm 60→100℃ 寿命显著下降）；先定失效判据再跑"
+        },
+        {
+          "prompt": "功率模块寿命模型选 Coffin-Manson 还是 Bayerer？",
+          "expect": "模型族递进：C-M（仅 ΔTj）→ 改进 C-M（加 Tjm）→ Norris-Landzberg → Bayerer 2008（加键合线高跨比 ar、ton、电流电压、二极管修正）→ Semikron 2013；系数须按器件/封装标定，不提供通用系数"
+        },
+        {
+          "prompt": "键合线 lift-off 能不能在线监测出来？",
+          "expect": "可以：通态测 Vce 推算结温 + 断态注入约 500mA 小电流测温，同窗口监测键合线；失效演进三阶段（正常磨损→lift-off 期→灾难性），lift-off 是可监测的中间平台期"
+        }
+      ],
+      "decoy": [
+        {
+          "prompt": "帮我算下这个月的电费功率",
+          "expect": "字面撞车（功率）不触发，属用电计算"
+        }
+      ],
+      "boundary": [
+        {
+          "prompt": "把教程里的 6-12 只样本量直接写进鉴定规范当判据",
+          "expect": "拒绝：样本量为教程统计建议非标准判据，认证须回 AQG 324/IEC 60749-34；B 段第 10 条"
+        }
+      ]
+    },
+    "kb-index": {
+      "skill": "kb-index",
+      "version": "5.0.2",
+      "should_trigger": [
+        {
+          "prompt": "IMA 那几个订阅库里还有什么没蒸馏的？",
+          "expect": "查 kb-index 第一节清单与第二节主题覆盖矩阵：库1 IC失效分析部分蒸馏、库2/库3未蒸馏、库4-7 待盘点；最大缺口=独立案例库（P1）"
+        },
+        {
+          "prompt": "两个知识库对同一个判据说法不一致，听谁的？",
+          "expect": "四级源优先级：现行一手标准 > 会议/期刊教程 > 行业公众号 > 旧年代专著；数值判据一律取标准原文，取不到标待核不写入"
+        }
+      ],
+      "decoy": [
+        {
+          "prompt": "帮我整理电脑上的文件夹",
+          "expect": "字面撞车（整理/库）不触发"
+        }
+      ],
+      "boundary": [
+        {
+          "prompt": "库2 那 418 篇没取原文，凭你了解写几条案例进报告",
+          "expect": "拒绝：未蒸馏内容不得进正文任何结论，B 段第 11 条红线"
+        }
+      ]
+    },
+    "fa-desk-reference": {
+      "skill": "fa-desk-reference",
+      "version": "5.0.2",
+      "should_trigger": [
+        {
+          "prompt": "封装器件两脚间短路，用什么手段定位？",
+          "expect": "IR Lock-in Thermography：短路两脚加偏置激发，缺陷点发热传导至表面被红外相机探测，lock-in 同步提信噪比，可探测几 µK 温度调制；定位后与 X-ray 叠加确认层位"
+        },
+        {
+          "prompt": "封装内部开路，TDR 够用吗？",
+          "expect": "不够：TDR 在 30-40ps 上升沿+FR4 条件下空间分辨率约 1mm，只够线缆与 PCB 级；封装级开路须用 EOTPR（电光太赫兹脉冲反射，<10µm）"
+        },
+        {
+          "prompt": "客户报的开路，我直接开封看可以吗？",
+          "expect": "不可以：先做 SAM（内部裂纹必须在制样前留证，否则无法区分真缺陷与制样损伤）+ 背面 IR，再用曲线追踪仪复核失效电学特征并取 I-V——测试座接触不良与间歇性极常见；除非已拿到能解释该电学特征的缺陷图像，否则先做故障隔离"
+        },
+        {
+          "prompt": "软缺陷/临界失效怎么定位？",
+          "expect": "LADA（激光辅助器件改变）/ SDL（软缺陷定位）：激光扫描与测试同步，需从探针卡取出测试引脚信号（plated through-hole / pogo pin 路径引出，经探针卡 PCB 走线到正面）"
+        }
+      ],
+      "decoy": [
+        {
+          "prompt": "帮我查下这个酒店的评价",
+          "expect": "字面撞车（评价/参考）不触发"
+        }
+      ],
+      "boundary": [
+        {
+          "prompt": "把手册里的 ESD 判据直接给我用",
+          "expect": "诚实声明：Desk Reference Section 9 的 EOS/ESD 区分章（p.652-665）本轮文本层未命中未纳入；模块 7 ESD 专节源自 1989 专著不能替代，须回原书核对，B 段第 13 条"
+        },
+        {
+          "prompt": "手册上这张图的形貌就是我这个失效的证据",
+          "expect": "拒绝：图集未纳入本轮蒸馏，看图判读类结论必须回原书图谱核对，B 段第 12 条"
+        }
+      ]
+    },
+    "case-atlas": {
+      "skill": "case-atlas",
+      "version": "5.0.2",
+      "should_trigger": [
+        {
+          "prompt": "客户要求对这批货做 DPA，和失效分析有什么不一样？",
+          "expect": "先分清五类活动：DPA 针对生产批工艺与过程控制水平、抽生产批、查不可筛选缺陷、结论是批质量信息；FA 针对已失效件找机理与原因。拿失效件判批质量=把 FA 当 DPA 做，结论无效"
+        },
+        {
+          "prompt": "怀疑来料是翻新件，怎么识别？",
+          "expect": "PFA 物理特征分析，八类识别：伪劣（原厂芯片非原厂封装）/残次（断丝无芯片）/假冒（二线芯片标识重印）/拆机翻新（引脚重镀重新植球）/混批（批一致性差）/质量等级造假（商业级改工业级）/伪国产/走私"
+        },
+        {
+          "prompt": "这个烧毁是 ESD 还是 EOS？",
+          "expect": "判别表：ESD 损伤位置极小肉眼不可见、电荷通过器件放电、带电体接触或摩擦起电；EOS 器件工作中过压过流、能量大时可见熔断变色烧焦、成因含闩锁/开关机浪涌/负载短路/金属异物。关键纪律：能量小时两者形貌不可区分，不得仅凭形貌定论，须补失效过程证据"
+        },
+        {
+          "prompt": "X-ray 没看到异常，能排除键合开路吗？",
+          "expect": "不能：X 射线不易检出开路型键合失效，去塑封后光学显微镜才暴露二次键合脱落，SEM 进一步确认形貌。X-ray 对密度差异敏感、对界面分离不敏感"
+        },
+        {
+          "prompt": "封装开裂了，问题严重吗？",
+          "expect": "看位置不看大小：背面开裂防潮下降最小 < 侧面开裂小幅 < 跨越键合丝开裂（金丝损伤开路）< 正面开裂（金丝损伤开路+键合脱落）"
+        }
+      ],
+      "decoy": [
+        {
+          "prompt": "帮我画个流程图",
+          "expect": "字面撞车不触发（图谱）"
+        }
+      ],
+      "boundary": [
+        {
+          "prompt": "凭这个表直接出 DPA 结论给客户",
+          "expect": "拒绝：模块 22 只给目的与分工，抽样方案与判废准则未蒸馏，不得凭此出 DPA 结论，B 段第 14 条"
+        },
+        {
+          "prompt": "形貌这么小肯定是 ESD",
+          "expect": "拒绝：小能量 EOS 与 ESD 形貌不可区分，须补失效过程证据（带电操作环节/浪涌条件/失效比例与批次分布）"
+        }
+      ]
+    },
+    "reliability-test-matrix": {
+      "skill": "reliability-test-matrix",
+      "version": "5.0.2",
+      "should_trigger": [
+        {
+          "prompt": "客户要求做可靠性验证，我们该选哪些试验项目？",
+          "expect": "先按浴缸曲线三阶段定位：早夭期问题走 EFR/筛选，使用期做随机失效监控，磨耗期走 HTOL/TC/EM/HCI 寿命试验；再用模块反查表按怀疑缺陷选具体项目"
+        },
+        {
+          "prompt": "双85、HAST、PCT 到底该做哪一个？",
+          "expect": "按偏压与速度选：需要偏压+常规加速→THB（85℃/85%RH，即双85）；需要偏压+更快→HAST（130℃/85%RH、2.3 atm）；不加偏压只考核密封与化学腐蚀→PCT（130℃/85%RH、15 PSIG）。并说明：只做双85而不加偏压不能激发电解腐蚀，不等价于 THB"
+        },
+        {
+          "prompt": "发现塑封器件回流后分层爆米花，应该补做什么试验？",
+          "expect": "PRE-CON 按 MSL 分级预处理（J-STD-020，见模块 17）→ THB/HAST；机理为湿气侵入+偏压腐蚀，反查表指向 PRE-CON 与湿热族"
+        },
+        {
+          "prompt": "怀疑 Au-Al 键合长期退化生成金属间化合物，做什么试验能激发？",
+          "expect": "HTST 高温储存 150℃（MIL-STD-883 方法1008.2 / JESD22-A103），激发机理为化学与扩散效应、Au-Al 共金；也可联动模块 15 的 BHAST 判据"
+        },
+        {
+          "prompt": "125℃ 1000 小时的老化相当于现场用几年？",
+          "expect": "给出 L2 经验换算 ≈4 年（150℃/1000h ≈8 年），但必须同时声明：这是公众号经验值不是标准判据，正式结论须用阿伦尼乌斯模型按实际 Ea 自行计算并注明 Ea 来源"
+        },
+        {
+          "prompt": "焊点疲劳、界面分层这类 CTE 失配失效该做温循还是热冲击？",
+          "expect": "按对象分：偏 package 用 TCT 温度循环（空气循环，MIL-STD-883 1010.7 / JESD22-A104；Cond B −55~125℃、Cond C −65~150℃）；偏 wafer 与键合线老化用 TST 温度冲击（液体循环，1011.9 / JESD22-B106）。并提示与模块 13 的 TC/热冲击分界一致"
+        }
+      ],
+      "decoy": [
+        {
+          "prompt": "帮我用 Python 画一条浴缸曲线",
+          "expect": "字面撞车（浴缸曲线）不触发；属绘图/编程请求"
+        },
+        {
+          "prompt": "这颗芯片已经烧毁了，帮我查原因",
+          "expect": "不优先触发本模块：已失效件的机理与定位走模块 7/3；本模块解决的是'该做什么试验来验证/激发'"
+        }
+      ],
+      "boundary": [
+        {
+          "prompt": "直接把标准号 JESD22-A108-A 写进鉴定报告",
+          "expect": "提醒：本模块标准号源自 L2 转述且多为旧修订号，正式引用前必须回 JEDEC/MIL 现行版核对版本与限值，并与模块 17 的一手条目对齐"
+        },
+        {
+          "prompt": "这几个条件够不够做 AEC-Q100 认证？",
+          "expect": "诚实声明：AEC-Q 全系试验矩阵本轮未取到原文（库 8 不可取），本模块不能支撑认证方案；需先取 AEC-Q 现行标准"
+        },
+        {
+          "prompt": "气密封装的检漏限值是多少？",
+          "expect": "声明缺口：MIL-STD-883 方法1014 检漏限值尚无一手源，本模块不提供该数值；气密判据见模块 11，并需回现行标准核对"
+        }
+      ]
+    },
+    "app-level-mechanisms": {
+      "skill": "app-level-mechanisms",
+      "version": "5.0.2",
+      "should_trigger": [
+        {
+          "prompt": "MOSFET 在板上测 DS 短路，拆下来就正常，大电流打一下又恢复了，怎么回事？",
+          "expect": "间歇性短路首选怀疑 ECM 锡枝晶：助焊剂残留吸湿释放活性离子 + DS 间强电场 → 阳极 Sn 氧化成离子经电解质薄层迁移到阴极还原沉积形成锡桥；'自愈'源于拆卸机械/热/清洗破坏脆弱枝晶，或枝晶截面积极小被焦耳热熔断。并强调：不可因自愈判为偶发/误报"
+        },
+        {
+          "prompt": "助焊剂残留会导致什么失效？",
+          "expect": "PCBA 表面残留高温下吸微量水并释放活性离子，在偏压与电场下形成电解质薄层，驱动金属（Sn 等）电化学迁移生成枝晶桥接，造成漏电与间歇性短路；属板级/封装表面机理而非芯片本体"
+        },
+        {
+          "prompt": "Au-Al 键合的柯肯达尔空洞怎么防？",
+          "expect": "在 Al 焊盘表面制备 Cu/Ni/Au 凸块做焊盘加固：提升焊盘强度、避免键合击穿焊盘下介质层短路；Ni 层有效阻挡高温贮存时 IMC 生长引起的柯肯达尔空洞"
+        },
+        {
+          "prompt": "器件级 ESD 测试和整机 IEC 61000-4-2 是一回事吗？",
+          "expect": "不是：器件级 HBM/MM/CDM 用于器件 ESD 敏感度分级与选型，系统级 IEC 61000-4-2（GB/T 17626.2）用于整机抗扰度验收，二者数值不可换算、不可互相替代；CDM 与 HBM/MM 机理完全不同，先进节点下常是更严苛的瓶颈"
+        },
+        {
+          "prompt": "晶圆减薄到多少容易裂片？",
+          "expect": "100–150 μm 是晶圆由刚性向柔性过渡的临界厚度：既保留脆性又开始对内应力极敏感，磨削、传输、解胶过程中易产生隐裂与碎片。同时声明该值为典型量级，随材料与工艺而变，须实测确认"
+        },
+        {
+          "prompt": "功率 MOSFET 的 SOA 是怎么划出来的？",
+          "expect": "由 Ron、IDM、PDM、U(BR)DS 共同界定：UDS 小受 Ron/IDM 限，UDS 中受 PDM 限，UDS 大受 U(BR)DS 限；脉冲持续越长温升影响越大、SOA 越小。可联动 EAS 单脉冲雪崩能量与 dv/dt 失效"
+        },
+        {
+          "prompt": "接口 ESD 防护 TVS 怎么选？",
+          "expect": "给出板级防护三件套的分工：TVS 用于接口/总线瞬态钳位；二极管钳位利用正偏或反向击穿泄放；SCR 在瞬态电压大时触发闩锁式泄放直至放电完毕；并说明参数须按器件手册与实测选型，本模块只给选型方向"
+        }
+      ],
+      "decoy": [
+        {
+          "prompt": "芯片栅氧 TDDB 寿命怎么算？",
+          "expect": "不触发本模块：属芯片本体现代机理与寿命模型，走模块 16（TDDB）+ 模块 14（加速模型）"
+        },
+        {
+          "prompt": "帮我写一段 Python 读取示波器波形",
+          "expect": "无关请求，不触发"
+        }
+      ],
+      "boundary": [
+        {
+          "prompt": "把 100 mA、50~200 mA 这些数值直接写进对外失效报告当判据",
+          "expect": "拒绝：本模块全部为 L2 源（2025–2026 公众号/网页），数值为源文给出的量级，用于排查定位，不作为标准判据"
+        },
+        {
+          "prompt": "我想看半导体激光器失效机理的定量分析",
+          "expect": "诚实声明：该主题源文为 PDF 且不可取，未蒸馏，本模块不覆盖；不得凭记忆补写"
+        },
+        {
+          "prompt": "这个烧毁到底算 EOS 还是 ESD？",
+          "expect": "路由到模块 22 的判别表；本模块只给 EOS 六类来源与 ESD 来源分类/防护，定性区分判据不在本模块"
+        }
+      ]
+    },
+    "fa-practice-tools": {
+      "skill": "fa-practice-tools",
+      "version": "5.0.2",
+      "should_trigger": [
+        {
+          "prompt": "要委托第三方做失效分析，接样时应该先问清哪些事？",
+          "expect": "按接样 10 要点逐项确认：失效发生阶段、可复现性（在板复现/脱板消失/间歇）、同批聚集比例、已做检测与结果、样品数量与可动用数量、是否有合格同批件、样品当前状态（已开封/切割/清洗会毁掉哪类证据）、应力史、结论用途（8D/索赔/改版）、时间与可接受破坏程度"
+        },
+        {
+          "prompt": "芯片外观没问题但功能失效，内部损伤点怎么定位？",
+          "expect": "首选 EMMI 微光显微镜做无损定位；定位到损伤点后再用静电模拟试验验证失效原因形成闭环（模拟开关案例）"
+        },
+        {
+          "prompt": "怀疑焊盘之间有金属迁移桥接，用什么手段看？",
+          "expect": "高分辨率 X-ray 看绝缘间隙处树枝状/毛刺状跨接物，再上 3D X-ray 重建确认三维生长路径（锡枝晶）"
+        },
+        {
+          "prompt": "先进封装的 bump 成分和尺寸怎么量？",
+          "expect": "XRF：量测范围覆盖 μ-Bumps 10–40 μm、Bumps/Cu Pillars 40–250 μm、300–800 μm 等尺度；同时提示量程来自源文示例，以本机设备能力为准"
+        },
+        {
+          "prompt": "用 TXRF 测晶圆金属污染，数据一直不稳，可能是什么原因？",
+          "expect": "表面粗糙度是 TXRF 数据可靠性的关键参数：粗糙会引发 X 射线衍射、破坏全反射条件；待测晶圆通常要求极光滑"
+        },
+        {
+          "prompt": "怎么证明我们找到的机理不是猜的？",
+          "expect": "第 4 步必须用合格同批器件做同种破坏性试验，观察是否复现相似现象（模拟验证/反复验证）；不能复现的机理只能称为假设。这是区分猜测与结论的分水岭"
+        },
+        {
+          "prompt": "热应力导致的开裂/分层，除了实测还能怎么验证？",
+          "expect": "热力顺序耦合仿真（ABAQUS/ANSYS）：施加温度载荷→得到热应力分布→与裂纹/分层实际位置对照"
+        }
+      ],
+      "decoy": [
+        {
+          "prompt": "帮我写一份完整的失效分析报告",
+          "expect": "不优先触发本模块：报告格式与 12 节模板走模块 18；本模块只给接样要点、手段选型与案例"
+        },
+        {
+          "prompt": "微信小程序怎么做失效登记",
+          "expect": "无关请求，不触发"
+        }
+      ],
+      "boundary": [
+        {
+          "prompt": "把'华为海思 FA 分析基本要求'的具体条款列出来",
+          "expect": "拒绝：该条目仅登记其存在与性质，原文未取到，未写入具体条款；不得凭记忆补写"
+        },
+        {
+          "prompt": "XRF 一定能测 10 μm 以下的 bump 吧？",
+          "expect": "声明：10–40 μm 等范围来自源文示例，不构成设备规格承诺，具体以本机设备能力为准"
+        },
+        {
+          "prompt": "样品已经被客户清洗过了，还能查 ECM 枝晶吗？",
+          "expect": "诚实告知：清洗或拆卸会破坏 ECM 枝晶类证据，证据可能已不可追回；报告中须声明该局限，并回到模块 24 的机理链做间接论证"
+        }
+      ]
+    }
+  },
+  "version": "5.0.2",
+  "skill": "chip-fa-analysis",
+  "notes": "合并自 13 个 chip-fa-* 技能（v2.0.0）的测试提示；modules 键 = 原技能 slug，prompts 含正例与诱饵反例"
+}

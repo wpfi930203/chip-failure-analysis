@@ -1,0 +1,94 @@
+# 许可与来源声明 · License & Notice
+
+本仓库包含**两类性质完全不同**的内容，适用**不同的许可条款**。请按目录区分适用。
+
+---
+
+## 一、代码 —— MIT License
+
+适用于：
+
+- `tools/*.py`（`make_icon.py`、`preview_icon.py`、`sync_meta.py`、`verify_meta.py`、`install.py`）
+- `.gitignore`、`.gitattributes`
+
+```
+MIT License
+
+Copyright (c) 2026 wpfi930203
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+---
+
+## 二、知识内容 —— 仅供学习研究，禁止商用
+
+适用于：
+
+- `SKILL.md`、`test-prompts.json`
+- `references/*.md`（全部 25 个知识模块）
+- `icons/*`（原创矢量，但作为技能标识一并声明）
+- `README.md`、`CHANGELOG.md`、`VERSIONING.md`
+
+### 2.1 性质
+
+上述内容是对**第三方版权作品**进行提炼、结构化与改写后形成的**衍生知识成果**，
+并非原创著作。其事实性知识、试验方法、判据与术语的著作权归**原出处**所有，
+包括但不限于：
+
+| 类型 | 来源（原著作权人所有） |
+|---|---|
+| 中文专著 | 《电子元器件失效分析技术》；半导体器件典型案例集；可靠性工程专著 2 部；《失效分析基础》（第 2 版） |
+| 英文手册 | ASM International, *Desk Reference* (7th Edition, 2019) |
+| 标准 | JEDEC JESD22 系列、J-STD-020E、IPC 相关系列标准（标准文本著作权归 JEDEC / IPC 等标准化组织） |
+| 教程 | IPFA 2019 功率器件可靠性教程 |
+| 行业文章 | 半导体行业公众号与技术媒体的公开文章（第三方作者所有） |
+
+### 2.2 授权范围
+
+在**不主张**对上述第三方内容享有著作权的前提下，本仓库作者仅就自身的
+**汇编、改写与结构化劳动**授予以下许可：
+
+- ✅ **允许**：个人学习、教学引用、企业内部技术研究、二次整理（须注明本仓库来源与原出处）
+- ❌ **禁止**：任何形式的商业使用、付费分发、将其并入商业产品或服务、
+  以本仓库内容整体或实质性部分作为商品销售
+- ⚠️ **须注意**：涉及标准条文的具体限值与判据，**请以标准原文为准**，本仓库不构成标准替代品
+
+### 2.3 引用纪律
+
+本仓库在蒸馏过程中遵循「单处引用 ≤ 150 字」的纪律，以改写与结构化为主，
+不逐段照搬原文。若你认为本仓库内容侵犯了你的权利，请提交 Issue 或联系仓库所有者，
+我们将在核实后**立即删除或改写**相关内容。
+
+---
+
+## 三、免责声明
+
+本仓库内容为**工程参考**，不构成任何形式的专业鉴定结论、质量判定或认证依据：
+
+- 模块 23 / 24 / 25 主要源自二手（L2）工程经验资料，**不得作为认证或判定的唯一依据**；
+- 源自扫描版专著的数值存在 OCR 误差可能，**关键判定请回查原书**；
+- 使用本仓库内容作出的任何工程决策及其后果，由使用者自行承担。
+
+---
+
+## 四、第三方商标
+
+本仓库中出现的产品名、公司名、标准编号均为其各自所有者的商标或注册商标，
+仅用于说明与指代，不代表任何形式的关联、赞助或背书。

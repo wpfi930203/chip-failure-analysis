@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 芯片失效分析 · chip + crack（裂纹源自封装体边缘起始，贯穿裸片）-->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0E3A44"/>
+      <stop offset="1" stop-color="#06222B"/>
+    </linearGradient>
+    <linearGradient id="die" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#12525F"/>
+      <stop offset="1" stop-color="#0A3641"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="44" fill="url(#bg)"/>
+  <!-- 四面引脚 -->
+  <g fill="#A8DFE9">
+    <rect x="32" y="57" width="18" height="10" rx="3"/>
+    <rect x="32" y="82.33" width="18" height="10" rx="3"/>
+    <rect x="32" y="107.67" width="18" height="10" rx="3"/>
+    <rect x="32" y="133" width="18" height="10" rx="3"/>
+    <rect x="150" y="57" width="18" height="10" rx="3"/>
+    <rect x="150" y="82.33" width="18" height="10" rx="3"/>
+    <rect x="150" y="107.67" width="18" height="10" rx="3"/>
+    <rect x="150" y="133" width="18" height="10" rx="3"/>
+    <rect x="57" y="32" width="10" height="18" rx="3"/>
+    <rect x="82.33" y="32" width="10" height="18" rx="3"/>
+    <rect x="107.67" y="32" width="10" height="18" rx="3"/>
+    <rect x="133" y="32" width="10" height="18" rx="3"/>
+    <rect x="57" y="150" width="10" height="18" rx="3"/>
+    <rect x="82.33" y="150" width="10" height="18" rx="3"/>
+    <rect x="107.67" y="150" width="10" height="18" rx="3"/>
+    <rect x="133" y="150" width="10" height="18" rx="3"/>
+  </g>
+  <!-- 封装体 -->
+  <rect x="50" y="50" width="100" height="100" rx="12" fill="#EAF7FA" stroke="#86CFDE" stroke-width="3"/>
+  <!-- 芯片裸片 -->
+  <rect x="70" y="70" width="60" height="60" rx="6" fill="url(#die)" stroke="#6FC6D6" stroke-width="2.5"/>
+  <!-- 裂纹（自右上角边缘起始，贯穿至左下边缘；折线为"脆性断裂"而非塑性变形）-->
+  <polyline points="130,72 123,79 110,90 118,100 100,112 106,120 80,130"
+            fill="none" stroke="#FF7A45" stroke-width="6"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 裂纹源标记 -->
+  <circle cx="123" cy="79" r="9.5" fill="#FF7A45"/>
+  <circle cx="123" cy="79" r="3.2" fill="#FFD2B8"/>
+</svg>
