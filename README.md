@@ -3,7 +3,7 @@
 > 一个可直接装进 WorkBuddy 的**芯片/半导体器件失效分析**技能包：25 个模块 · 五大主题 · 12 节报告模板。
 > 从「这颗芯片为什么烧了」一路问到「问题出在哪个工序、该用什么仪器、报告怎么写、怎么闭环」。
 
-[![version](https://img.shields.io/badge/version-5.0.2-blue)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-5.0.3-blue)](CHANGELOG.md)
 [![modules](https://img.shields.io/badge/modules-25-brightgreen)](SKILL.md)
 [![lang](https://img.shields.io/badge/lang-中文-red)]()
 [![license](https://img.shields.io/badge/license-代码%20MIT%20%2F%20内容见%20LICENSE-lightgrey)](LICENSE)
@@ -87,7 +87,20 @@ chip-fa-analysis/
 | `sync_meta.py` | 生成 `_user_meta.json`：中文展示名 + 图标绝对路径 |
 | `verify_meta.py` | 按 WorkBuddy 真实代码路径模拟解析，打印展示名 / iconUrl / PNG 签名 |
 | `install.py` | 一键：拷贝 → 刷 meta → 逐文件 SHA256 校验 → 自动复核；多出的文件只报告不删除 |
-| `bump_version.py` | 一次改完 4 处版本号（防漏改）；不带参数则只查询版本分布 |
+| `bump_version.py` | 一次改完 4 处版本号（`SKILL.md` / `test-prompts.json` / `sync_meta.py` / `README.md` 徽章）；不带参数则只查询版本分布 |
+| `release.py` | **一键发版**：体检 → 建仓 → 推送 main → 推标签 → 用 CHANGELOG 建 Release。自包含（owner/repo 取自 `git remote`）；`--check` 只体检，`--create-repo` 自动建仓 |
+
+### 发布新版本
+
+```bash
+python tools/bump_version.py 5.0.4     # 4 处版本号一次改完
+# 手工更新 CHANGELOG.md
+python tools/install.py                # 装到用户级 + SHA256 校验
+python tools/release.py --check        # 体检
+python tools/release.py                # 提交推送 + 打标签 + 建 Release
+```
+
+详见 [`VERSIONING.md`](VERSIONING.md)。
 
 ## 一个必须知道的坑：WorkBuddy 不读 frontmatter 的 `displayName` / `icon`
 
@@ -135,6 +148,6 @@ chip-fa-analysis/
 
 ## 版本管理
 
-版本号语义化（`MAJOR.MINOR.PATCH`），当前 **5.0.2**。
+版本号语义化（`MAJOR.MINOR.PATCH`），当前 **5.0.3**。
 版本号在 `SKILL.md`、`test-prompts.json`、`tools/sync_meta.py`、`_user_meta.json` 四处同步，
 改版一律用脚本保证一致。策略与发版流程见 [`VERSIONING.md`](VERSIONING.md)，历史见 [`CHANGELOG.md`](CHANGELOG.md)。

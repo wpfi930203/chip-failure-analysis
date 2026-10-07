@@ -6,6 +6,13 @@ _marketplace_meta.json
 _knot_meta.json
 _builtin_market_meta.json
 
+# ---- 凭据：绝对不许入库 ----
+# tools/release.py 默认从这里读 PAT，用完自动删除
+.gh_token
+.gh_token.*
+*.token
+.env
+
 # ---- Python ----
 __pycache__/
 *.py[cod]

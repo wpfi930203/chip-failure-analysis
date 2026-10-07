@@ -12,6 +12,30 @@
 
 ---
 
+## [5.0.3] - 2026-10-07
+
+### Added
+- `tools/release.py` — **自包含一键发版脚本**：owner/repo 从 `git remote` 推导、仓库路径从脚本自身
+  位置推导，不依赖任何仓库外文件。串联「体检 → 建仓 → 推送 main → 推标签 → 用 CHANGELOG 建 Release」，
+  并可幂等重跑。`--check` 只体检不改动；`--create-repo` 自动建仓；`--force-with-lease` 覆盖推送。
+  token 经**临时 credential helper** 注入，不落 `.git/config`、不进 argv 与日志；文件方式读取时成功后自动删除。
+- `VERSIONING.md` 第七节 — 远程仓库信息、clone 目录名硬约束、克隆后必做 `sync_meta.py`，
+  以及 `github.com:443` 不可达（沙箱/受限网络）时的三种处理路径。
+- `.gitignore` 新增凭据拦截段：`.gh_token` / `.gh_token.*` / `*.token` / `.env`。
+
+### Changed
+- 版本号统一至 5.0.3（`SKILL.md` / `test-prompts.json` / `tools/sync_meta.py`）。
+- `VERSIONING.md` 发版流程第 5–6 步改用 `tools/release.py`，并补该脚本的能力表与选型理由；
+  标签表补 `v5.0.3` 行、注明每个标签同时对应一个 Release。
+- 4 处版本号一致性改由 `tools/bump_version.py` 批量维护（历史上曾漏改 `test-prompts.json`）。
+
+### Notes
+- **本仓库自 v5.0.2 起的 git 历史与标签**。v1.0.0–v5.0.1 的演进只存在于 `CHANGELOG.md`
+  （早期以"直接改写工作区文件"的方式迭代，文件快照不可追溯），**未补打指向当前提交的标签**。
+- v5.0.3 是本仓库的**第二个标签**，同时用于验证 `tools/release.py` 全链路可用。
+
+---
+
 ## [5.0.2] - 2026-10-07
 
 ### Fixed

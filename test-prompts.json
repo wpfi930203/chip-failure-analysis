@@ -2,7 +2,7 @@
   "modules": {
     "chip-fa-hermeticity": {
       "skill": "chip-fa-hermeticity",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "should_trigger": [
         {
           "prompt": "气密封装的IGBT模块做HV-H3TRB出现内部水汽超标，怀疑管壳漏气，检漏应该从哪一步开始？",
@@ -52,7 +52,7 @@
     },
     "chip-fa-router": {
       "skill": "chip-fa-router",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "prompts": [
         {
           "prompt": "这颗 IGBT 模块炸了，帮我分析一下原因",
@@ -114,7 +114,7 @@
     },
     "chip-fa-procedure": {
       "skill": "chip-fa-procedure",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "prompts": [
         {
           "prompt": "失效分析按什么顺序做",
@@ -166,7 +166,7 @@
     },
     "chip-fa-electrical": {
       "skill": "chip-fa-electrical",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "prompts": [
         {
           "prompt": "失效样品到手先测哪些电参数",
@@ -218,7 +218,7 @@
     },
     "chip-fa-stress-test": {
       "skill": "chip-fa-stress-test",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "prompts": [
         {
           "prompt": "客户现场的失效复现不出来怎么办",
@@ -270,7 +270,7 @@
     },
     "chip-fa-mechanism": {
       "skill": "chip-fa-mechanism",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "prompts": [
         {
           "prompt": "怎么区分 EOS 和 ESD 失效",
@@ -322,7 +322,7 @@
     },
     "chip-fa-reliability-stats": {
       "skill": "chip-fa-reliability-stats",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "should_trigger": [
         {
           "prompt": "1000小时寿命试验23片全部没坏，MTTF怎么报给客户？",
@@ -372,7 +372,7 @@
     },
     "chip-fa-characterization": {
       "skill": "chip-fa-characterization",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "prompts": [
         {
           "prompt": "怎么判断封装里有没有分层",
@@ -439,11 +439,11 @@
         "请给我 FTA 建树的五条规则和最小割集上行法步骤——路由到 ./chip-fa-prevention，本技能只做方法选型",
         "芯片表面沾污清洗该用什么溶液？——路由到 ./chip-fa-sample-prep，本技能的化学清洗配方仅针对金属断口且明确禁止用于芯片表面"
       ],
-      "version": "5.0.2"
+      "version": "5.0.3"
     },
     "chip-fa-localization": {
       "skill": "chip-fa-localization",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "prompts": [
         {
           "prompt": "开封后做 EMMI 没看到亮点，还能怎么办",
@@ -495,7 +495,7 @@
     },
     "chip-fa-sample-prep": {
       "skill": "chip-fa-sample-prep",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "prompts": [
         {
           "prompt": "塑封模块要打开看芯片，用什么方法",
@@ -547,7 +547,7 @@
     },
     "chip-fa-closed-loop": {
       "skill": "chip-fa-closed-loop",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "should_trigger": [
         "失效分析报告交付后产线同类失效仍反复出现，如何建立验证闭环？",
         "客户投诉某批次模块失效比例偏高，帮我组织排查思路",
@@ -567,7 +567,7 @@
     },
     "chip-fa-prevention": {
       "skill": "chip-fa-prevention",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "prompts": [
         {
           "prompt": "元器件级 FMEA 的功能单元怎么划分",
@@ -664,7 +664,7 @@
     },
     "standards-jesd22": {
       "skill": "standards-jesd22",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "should_trigger": [
         {
           "prompt": "IGBT 做 HTRB 考核，JEDEC 对应哪个方法？工作点电压怎么定？",
@@ -710,7 +710,7 @@
     },
     "report-template": {
       "skill": "report-template",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "should_trigger": [
         {
           "prompt": "帮我出一份这颗 IGBT 的失效分析报告，客户要用",
@@ -748,7 +748,7 @@
     },
     "power-device-reliability": {
       "skill": "power-device-reliability",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "should_trigger": [
         {
           "prompt": "IGBT 模块功率循环试验怎么做？ΔTj 和 Tjm 怎么定？",
@@ -778,7 +778,7 @@
     },
     "kb-index": {
       "skill": "kb-index",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "should_trigger": [
         {
           "prompt": "IMA 那几个订阅库里还有什么没蒸馏的？",
@@ -804,7 +804,7 @@
     },
     "fa-desk-reference": {
       "skill": "fa-desk-reference",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "should_trigger": [
         {
           "prompt": "封装器件两脚间短路，用什么手段定位？",
@@ -842,7 +842,7 @@
     },
     "case-atlas": {
       "skill": "case-atlas",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "should_trigger": [
         {
           "prompt": "客户要求对这批货做 DPA，和失效分析有什么不一样？",
@@ -884,7 +884,7 @@
     },
     "reliability-test-matrix": {
       "skill": "reliability-test-matrix",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "should_trigger": [
         {
           "prompt": "客户要求做可靠性验证，我们该选哪些试验项目？",
@@ -938,7 +938,7 @@
     },
     "app-level-mechanisms": {
       "skill": "app-level-mechanisms",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "should_trigger": [
         {
           "prompt": "MOSFET 在板上测 DS 短路，拆下来就正常，大电流打一下又恢复了，怎么回事？",
@@ -996,7 +996,7 @@
     },
     "fa-practice-tools": {
       "skill": "fa-practice-tools",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "should_trigger": [
         {
           "prompt": "要委托第三方做失效分析，接样时应该先问清哪些事？",
@@ -1053,7 +1053,7 @@
       ]
     }
   },
-  "version": "5.0.2",
+  "version": "5.0.3",
   "skill": "chip-fa-analysis",
   "notes": "合并自 13 个 chip-fa-* 技能（v2.0.0）的测试提示；modules 键 = 原技能 slug，prompts 含正例与诱饵反例"
 }

@@ -31,7 +31,7 @@ import time
 DISPLAY_NAME = "芯片失效分析 Skill"
 DISPLAY_NAME_EN = "Chip Failure Analysis Skill"
 SLUG = "chip-fa-analysis"
-VERSION = "5.0.2"
+VERSION = "5.0.3"
 DESCRIPTION_ZH = ("芯片/半导体器件失效分析专家。25 个模块覆盖五大主题：元器件基础、可靠性与测试标准、"
                   "失效机理、分析流程与方法、预防闭环与案例。含 11 步程序、故障隔离定量分辨率、"
                   "可靠性试验四维矩阵、应用级机理（锡枝晶/EOS/ESD/键合退化）、功率器件寿命建模、"
